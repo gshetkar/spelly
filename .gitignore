@@ -1,0 +1,6 @@
+.vscode
+*.hi
+*.o
+.stack-work/
+spelly.cabal
+*~
