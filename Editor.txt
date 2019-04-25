@@ -1,5 +1,3 @@
-Haskell is a staticlly typed
-purely functional progrbmming language with tyxe inference and lazy evaluation 
-Type clgsses which enable type-safe operator operloading originated in Haskell 
-Its main implementation is the Glasgow Haskekk Compileo 
-It is namewd after logician Haskell Curry
+Writers write funging descriptive paragraphs because their purpose is to describe 
+something Their point is that 
+something is beautiful or disgusting or strangely intriguing Writers write persuasive and argument steep paragraphs because their purpose is to persuade or convince someone Their funing point is that their reader should see things a particular way and possibly lol action bottee on that new way of seeing things Writers write paragraphs of comparison buttwrfly because the comparison will make their point clear to their readers

@@ -57,11 +57,11 @@ error_in_file text dict = concat (map (\(a,b) -> (make_tuple a b dict)) (zip [1.
 make_tuple :: (Ord t, Num t, Enum t) => t1 -> [Char] -> String -> [(t1, t, [Char])]
 make_tuple line_no text line = map (\(x,y) -> (line_no,x,y)) (position_of_wrong_words_in_line text line)
 
-myoutput :: String -> String -> String
-myoutput text dict = unlines (map (\(a,b,c,d) -> (show a)++"::"++(show b)++"\t"++c++"\t\t"++"Suggestions :: "++(unwords d)) (mysuggestion text dict))
+give_me_suggestion :: [Char] -> String -> String -> String -> [[Char]]
+give_me_suggestion word_to_check dict suggestion_no edit_bound = map (\(x,y) -> x) (take (read suggestion_no::Int) (reverse (sortBy (compare `on` snd) (filter (\(a,b) -> (distance word_to_check a <= (read edit_bound::Int))) (filter (\(a,b) -> ((abs (length word_to_check - length a)) <= 1)) (load_dictionary_with_frequencies dict))))))
 
-mysuggestion :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> [(t1, t, [Char], [[Char]])]
-mysuggestion text dict = map (\(a,b,c) -> (a,b,c,(give_me_suggestion c dict))) (error_in_file text dict) 
+mysuggestion :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> String -> String -> [(t1, t, [Char], [[Char]])]
+mysuggestion text dict suggestion_no edit_bound = map (\(a,b,c) -> (a,b,c,(give_me_suggestion c dict suggestion_no edit_bound))) (error_in_file text dict) 
 
-give_me_suggestion :: [Char] -> String -> [[Char]]
-give_me_suggestion word_to_check dict = map (\(x,y) -> x) (take 3 (reverse (sortBy (compare `on` snd) (filter (\(a,b) -> (distance word_to_check a == 1)) (filter (\(a,b) -> ((abs (length word_to_check - length a)) <= 1)) (load_dictionary_with_frequencies dict))))))
+myoutput :: String -> String -> String -> String -> String
+myoutput text dict suggestion_no edit_bound= unlines (map (\(a,b,c,d) -> (show a)++"::"++(show b)++"\t"++c++"\t\t"++"Suggestions :: "++(unwords d)) (mysuggestion text dict suggestion_no edit_bound))

@@ -1,8 +1,8 @@
 module Edit_Distance
 (distance
 ) where
-	
-import qualified Data.Vector as V
+
+import Data.Array
 
 distance :: Eq a => [a] -> [a] -> Int
 distance a b 
