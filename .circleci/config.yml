@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: fpco/stack-build:lts
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Cached Dependencies
+          keys:
+            - cci-demo-haskell-v2-{{ checksum "spelly/package.yaml" }}
+      - run:
+          name: Resolve/Update Dependencies
+          command: |
+            cd spelly
+            stack setup
+      - run:
+          name: Run tests
+          command: |
+            cd spelly
+            stack test
+      - run:
+          name: Install executable
+          command: |
+            cd spelly
+            stack install
+      - save_cache:
+          name: Cache Dependencies
+          key: cci-demo-haskell-v2-{{ checksum "spelly/package.yaml" }}
+          paths:
+            - "spelly/.stack-work"
+            - "/root/.stack"
+      - store_artifacts: # upload build artifact for display in CircleCi
+          path: ~/.local/bin/circleci-demo-haskell-exe
+          destination: circleci-demo-haskell-exe

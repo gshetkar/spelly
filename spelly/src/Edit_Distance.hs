@@ -1,8 +1,11 @@
 module Edit_Distance
 (distance
 ) where
+<<<<<<< HEAD:Edit_Distance.hs
 
 import Data.Array
+=======
+>>>>>>> f2551ece2b71d390a7e996175ff605aae3b6b530:spelly/src/Edit_Distance.hs
 
 distance :: Eq a => [a] -> [a] -> Int
 distance a b 

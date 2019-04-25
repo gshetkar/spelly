@@ -1,9 +1,9 @@
-module Dictionary_Operation
+module Dictionary_Operations
 (load_dictionary_without_frequencies
 ,load_dictionary_with_frequencies
 ,give_me_words
 ,give_me_word_frequency
-,group_same_words)where
+,group_same_words) where
 
 import Data.List
 import Data.Char
