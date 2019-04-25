@@ -1,6 +1,5 @@
-i love you anurag patil anurag
-i am in Hyderabad
-
-anurag anurag
-
-patil patil
+Haskell is a staticlly typed
+purely functional progrbmming language with tyxe inference and lazy evaluation 
+Type clgsses which enable type-safe operator operloading originated in Haskell 
+Its main implementation is the Glasgow Haskekk Compileo 
+It is namewd after logician Haskell Curry

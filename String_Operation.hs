@@ -9,7 +9,9 @@ module String_Operation
 ,position_of_wrong_words_in_line
 ,error_in_file
 ,make_tuple
-,myoutput)where
+,myoutput
+,mysuggestion
+,give_me_suggestion)where
 
 import Dictionary_Operation hiding (group_same_words, give_me_word_frequency, give_me_words)
 import Data.List
@@ -17,6 +19,7 @@ import System.IO
 import Data.Char
 import Control.Arrow
 import Data.Function
+import Edit_Distance
 
 right_words_of_string :: String -> String -> [String]
 right_words_of_string text dict = filter (\x -> x `elem` (load_dictionary_without_frequencies dict)) (give_me_words text)
@@ -43,16 +46,22 @@ indices_in_text pattern text = map (+1) (map fst (filter (snd >>> ((==) pattern)
 			  where isSpace' = fst >>> isSpace
 
 wrong_words_in_line :: String -> String -> [String]
-wrong_words_in_line text dict = map (\x -> (head x)) (group (sort (wrong_words_of_string text dict)))
+wrong_words_in_line text line = map (\x -> (head x)) (group (sort (wrong_words_of_string text line)))
 
 position_of_wrong_words_in_line :: (Ord a, Num a, Enum a) => [Char] -> String -> [(a, [Char])]
-position_of_wrong_words_in_line x y = sortBy (compare `on` fst) (concat (map (\z -> (map (\a -> (a,z)) (indices_in_text z x))) (wrong_words_in_line x y)))
+position_of_wrong_words_in_line text line = sortBy (compare `on` fst) (concat (map (\z -> (map (\a -> (a,z)) (indices_in_text z text))) (wrong_words_in_line text line)))
 
 error_in_file :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> [(t1, t, [Char])]
-error_in_file x y = concat (map (\(a,b) -> (make_tuple a b y)) (zip [1..] (lines x)))
+error_in_file text dict = concat (map (\(a,b) -> (make_tuple a b dict)) (zip [1..] (lines text)))
 
 make_tuple :: (Ord t, Num t, Enum t) => t1 -> [Char] -> String -> [(t1, t, [Char])]
-make_tuple a b c = map (\(x,y) -> (a,x,y)) (position_of_wrong_words_in_line b c)
+make_tuple line_no text line = map (\(x,y) -> (line_no,x,y)) (position_of_wrong_words_in_line text line)
 
 myoutput :: String -> String -> String
-myoutput x y = unlines (map (\(a,b,c) -> (show a)++"::"++(show b)++"\t"++c) (error_in_file x y))
+myoutput text dict = unlines (map (\(a,b,c,d) -> (show a)++"::"++(show b)++"\t"++c++"\t\t"++"Suggestions :: "++(unwords d)) (mysuggestion text dict))
+
+mysuggestion :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> [(t1, t, [Char], [[Char]])]
+mysuggestion text dict = map (\(a,b,c) -> (a,b,c,(give_me_suggestion c dict))) (error_in_file text dict) 
+
+give_me_suggestion :: [Char] -> String -> [[Char]]
+give_me_suggestion word_to_check dict = map (\(x,y) -> x) (take 3 (reverse (sortBy (compare `on` snd) (filter (\(a,b) -> (distance word_to_check a == 1)) (filter (\(a,b) -> ((abs (length word_to_check - length a)) <= 1)) (load_dictionary_with_frequencies dict))))))
