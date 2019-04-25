@@ -11,7 +11,7 @@ module String_Operation
 ,make_tuple
 ,myoutput)where
 
-import Dictionary_Operation
+import Dictionary_Operation hiding (group_same_words, give_me_word_frequency, give_me_words)
 import Data.List
 import System.IO
 import Data.Char
@@ -34,7 +34,7 @@ give_me_words :: String -> [String]
 give_me_words text =  sort (concat (map words (lines text)))
 
 indices_in_text :: (Num b, Enum b) => [Char] -> [Char] -> [b]
-indices_in_text pattern text = map fst (filter (snd >>> ((==) pattern)) (words' (zip text [0..])))
+indices_in_text pattern text = map (+1) (map fst (filter (snd >>> ((==) pattern)) (words' (zip text [0..]))))
 	where words' s = 
 			  case dropWhile isSpace' s of
 			    [] -> []
