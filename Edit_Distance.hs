@@ -1,11 +1,11 @@
 module Edit_Distance
-(dist
+(distance
 ) where
 	
 import qualified Data.Vector as V
 
-dist :: Eq a => [a] -> [a] -> Int
-dist a b 
+distance :: Eq a => [a] -> [a] -> Int
+distance a b 
     = last (if lab == 0 then mainDiag
 	    else if lab > 0 then lowers !! (lab - 1)
 		 else   uppers !! (-1 - lab))
