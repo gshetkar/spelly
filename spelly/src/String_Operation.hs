@@ -13,7 +13,7 @@ module String_Operation
 ,mysuggestion
 ,give_me_suggestion)where
 
-import Dictionary_Operation hiding (group_same_words, give_me_word_frequency, give_me_words)
+import Dictionary_Operations hiding (group_same_words, give_me_word_frequency, give_me_words)
 import Data.List
 import System.IO
 import Data.Char
