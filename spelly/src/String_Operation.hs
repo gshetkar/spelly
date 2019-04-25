@@ -63,10 +63,5 @@ give_me_suggestion word_to_check dict suggestion_no edit_bound = map (\(x,y) -> 
 mysuggestion :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> String -> String -> [(t1, t, [Char], [[Char]])]
 mysuggestion text dict suggestion_no edit_bound = map (\(a,b,c) -> (a,b,c,(give_me_suggestion c dict suggestion_no edit_bound))) (error_in_file text dict) 
 
-<<<<<<< HEAD:String_Operation.hs
 myoutput :: String -> String -> String -> String -> String
 myoutput text dict suggestion_no edit_bound= unlines (map (\(a,b,c,d) -> (show a)++"::"++(show b)++"\t"++c++"\t\t"++"Suggestions :: "++(unwords d)) (mysuggestion text dict suggestion_no edit_bound))
-=======
-give_me_suggestion :: [Char] -> String -> [[Char]]
-give_me_suggestion word_to_check dict = map (\(x,y) -> x) (take 3 (reverse (sortBy (compare `on` snd) (filter (\(a,b) -> (distance word_to_check a == 1)) (filter (\(a,b) -> ((abs (length word_to_check - length a)) <= 1)) (load_dictionary_with_frequencies dict))))))
->>>>>>> f2551ece2b71d390a7e996175ff605aae3b6b530:spelly/src/String_Operation.hs

@@ -24,7 +24,7 @@ main = do
 t :: [String] -> IO ()  
 t [fileName] = do
 	text_file <- readFile fileName
-	dictionary <- readFile "Frequencies.txt"
+	dictionary <- readFile "data/Frequencies.txt"
 	putStrLn (myoutput (map toLower text_file) (map toLower dictionary) "3" "1")
 
 td :: [String] -> IO ()
@@ -42,7 +42,7 @@ tds [fileName, dictionaryName, suggestion_no] = do
 te :: [String] -> IO ()  
 te [fileName, edit_bound] = do
 	text_file <- readFile fileName
-	dictionary <- readFile "Frequencies.txt"
+	dictionary <- readFile "data/Frequencies.txt"
 	putStrLn (myoutput (map toLower text_file) (map toLower dictionary) "3" edit_bound)
 
 tde :: [String] -> IO ()
@@ -60,13 +60,13 @@ tdse [fileName, dictionaryName, suggestion_no, edit_bound] = do
 ts :: [String] -> IO ()
 ts [fileName, suggestion_no] = do
 	text_file <- readFile fileName
-	dictionary <- readFile "Frequencies.txt"
+	dictionary <- readFile "data/Frequencies.txt"
 	putStrLn (myoutput (map toLower text_file) (map toLower dictionary) suggestion_no "1")
 
 tse :: [String] -> IO ()
 tse [fileName, suggestion_no, edit_bound] = do
 	text_file <- readFile fileName
-	dictionary <- readFile "Frequencies.txt"
+	dictionary <- readFile "data/Frequencies.txt"
 	putStrLn (myoutput (map toLower text_file) (map toLower dictionary) suggestion_no edit_bound)
 
 
