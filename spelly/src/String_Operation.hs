@@ -23,7 +23,7 @@ print_suggestion text dict s e = unlines $ map (output_format) (suggestions (cle
 
 
 output_format :: (Show a1, Show a) => (a1, a, [Char], [String]) -> [Char]
-output_format (line_num, char_num, word, suggested_words) = "\x1b[34m" ++ (show line_num) ++ "::" ++ (show char_num) ++ "\t" ++ "\x1b[31m" ++ word  ++ "\x1b[32m" ++ (unwords (map (\x -> "\n\t\t"++x ) suggested_words)) ++ "\n"
+output_format (line_num, char_num, word, suggested_words) =  "\x1b[34m" ++"\x1b[1m" ++ (show line_num) ++ "::" ++ (show char_num) ++ "\t" ++ "\x1b[31m" ++ word  ++ "\x1b[32m" ++ (unwords (map (\x -> "\n\t\t"++x ) suggested_words)) ++ "\n"
 
 
 suggestions :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> Int -> Int -> [(t1, t, [Char], [[Char]])]
