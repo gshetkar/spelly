@@ -44,11 +44,11 @@ The documentation is done using haddock and can be found [here]().
 ## Example
 
 1. The program is used on the file [Editor.txt](spelly/data/Editor.txt) by the following steps
- -  > $ stack build
- - >$ stack exec spelly-exe t /home/ubuntu/Documents/Editor.txt
+ - ```stack build```
+ - ```stack exec spelly-exe t /home/ubuntu/Documents/Editor.txt```
 
 2. It gives the following output  
-![Output on the run]()
+![Output on the run](spelly/data/image.png)
 
  The number _1::1_  denotes the line number and the character of the mistaken word respectively  
  Following that is the word itself _cnduo't_  
@@ -62,7 +62,8 @@ The documentation is done using haddock and can be found [here]().
 ## Customizing the Run
 The input of the program can be customized to
 -  take custom dictionary (_d_) 
-_** The format of the dictionary text file should be**
+ _The format of the dictionary text file should be_
+
   word(1) frequency(1)
   word(2) frequency(2)
   ...
