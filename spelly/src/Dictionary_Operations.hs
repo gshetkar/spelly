@@ -34,7 +34,7 @@ load_dictionary_without_frequencies dict = map (\(x,y) -> x) (load_dictionary_wi
 char_filter :: Char -> Bool
 char_filter c = (Char.isLower c || Char.isSpace c || (c == '\''))
 
---| This function takes a string and replaces characters which are not allowed by char_filter with space
+-- | This function takes a string and replaces characters which are not allowed by char_filter with space
 clean_text :: [Char] -> [Char]
 clean_text text = map (\x -> if (char_filter x) then x else ' ') lower_case_text
 		where lower_case_text = map Char.toLower text
