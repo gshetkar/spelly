@@ -50,12 +50,13 @@ The documentation is done using haddock and can be found [here]().
 2. It gives the following output  
 ![Output on the run]()
 
- The number _1::16_  denotes the line number and the character of the mistaken word respectively  
- Following that is the word itself _funging_  
+ The number _1::1_  denotes the line number and the character of the mistaken word respectively  
+ Following that is the word itself _cnduo't_  
  Then the suggested words are given in new lines in decreasing order of frequencies  
- _funding_  
- _lunging_  
- _munging_  
+ _conduct_  
+ _conduit_  
+ _induct_  
+  
  
  
 ## Customizing the Run
@@ -79,24 +80,27 @@ Default values are
 - e = 2
 
 Following are the eight configurations of command inputs:
-1. ```stack exec spelly-exe t "/pathname/filename.txt"```
+1. ```stack exec spelly-exe t </pathname/filename.txt>```
 
-2. ```stack exec spelly-exe td "/pathname/filename.txt" "/pathname/dictionaryfilename.txt"```
+2. ```stack exec spelly-exe td </pathname/filename.txt> </pathname/dictionaryfilename.txt>```
 
-3. ```stack exec spelly-exe tds "/pathname/filename.txt" "/pathname/dictionaryfilename.txt" svalue ```
+3. ```stack exec spelly-exe tds </pathname/filename.txt> </pathname/dictionaryfilename.txt> <svalue> ```
 
-4. ```stack exec spelly-exe te "/pathname/filename.txt" evalue```
+4. ```stack exec spelly-exe te </pathname/filename.txt> evalue```
 
-5. ```stack exec spelly-exe tde "/pathname/filename.txt" "/pathname/dictionaryfilename.txt" evalue```
+5. ```stack exec spelly-exe tde </pathname/filename.txt> </pathname/dictionaryfilename.txt> <evalue>```
 
-6. ```stack exec spelly-exe tdse"/pathname/filename.txt" "/pathname/dictionaryfilename.txt" svalue evalue```
+6. ```stack exec spelly-exe tdse </pathname/filename.txt> </pathname/dictionaryfilename.txt> <svalue> <evalue>```
 
-7. ```stack exec spelly-exe ts "/pathname/filename.txt" svalue```
+7. ```stack exec spelly-exe ts </pathname/filename.txt> <svalue>```
 
-8. ```stack exec spelly-exe tse "/pathname/filename.txt" svalue evalue```
+8. ```stack exec spelly-exe tse </pathname/filename.txt> <svalue> <evalue>```
 
 
 
  ## Software Used
  - [Circle CI](https://circleci.com/docs/2.0/language-haskell/) for Continuous Integration and unit testing
  - [Stack](https://docs.haskellstack.org/en/stable/README/) for building the haskell project
+
+## Bibliography
+This [algorithm](http://users.monash.edu/~lloyd/tildeStrings/Alignment/92.IPL.html) may be used in  Edit-distance file for better speed. This is given by Llyod Allison ([wiki-link](https://wiki.haskell.org/Edit_distance)).
