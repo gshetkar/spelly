@@ -62,7 +62,7 @@ indices_in_text pattern text = map (+1) (map fst (filter (snd >>> ((==) pattern)
 
 -- | This Function takes a text line and dictionary as it's arguments and produces a list of unique wrong words in that line.
 wrong_words_in_line :: String -> String -> [String]
-wrong_words_in_line text dict = map (\x -> (head x)) (group (sort (wrong_words_of_string text dict))).
+wrong_words_in_line text dict = map (\x -> (head x)) (group (sort (wrong_words_of_string text dict)))
 
 -- | This Function takes a text line and dictionary as it's arguments and produces a list of all wrong words in that line.
 wrong_words_of_string :: String -> String -> [String]
