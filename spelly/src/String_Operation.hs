@@ -18,21 +18,20 @@ import Data.Function
 import Edit_Distance
 
 print_suggestion :: String -> String -> Int -> Int -> String
-print_suggestion text dict s e = unlines $ map (output_format) (suggestions text dict s e)
+print_suggestion text dict s e = unlines $ map (output_format) (suggestions (clean_text text) dict s e)
+
 
 
 output_format :: (Show a1, Show a) => (a1, a, [Char], [String]) -> [Char]
-output_format (line_num, char_num, word, suggested_words) = (show line_num) ++ "::" ++ (show char_num) ++ "\t" ++ word ++ "\t\t" ++ "Suggestions :: " ++ (unwords suggested_words)
+output_format (line_num, char_num, word, suggested_words) = "\x1b[34m" ++ (show line_num) ++ "::" ++ (show char_num) ++ "\t" ++ "\x1b[31m" ++ word  ++ "\x1b[32m" ++ (unwords (map (\x -> "\n\t\t"++x ) suggested_words)) ++ "\n"
 
 
 suggestions :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> Int -> Int -> [(t1, t, [Char], [[Char]])]
 suggestions text dict s e = map (\(line_num, char_num, word) -> (line_num, char_num, word, (give_me_suggestion word dict s e))) (error_in_file text dict)
 
-
 give_me_suggestion :: [Char] -> String -> Int -> Int -> [[Char]]
 give_me_suggestion word_to_check dict s e = map fst $ take s $ reverse $ sortBy (compare `on` snd) word_count_pair
     where word_count_pair =  [(word, freq) | (word, freq) <- (load_dictionary_with_frequencies dict), length_diff_less_than (e+1) (length word_to_check) word, distance word_to_check word <= e]
--- filter (\(a,b) -> (distance word_to_check a <= 1)) (filter (length_diff_less_than 2 (length word_to_check)) (load_dictionary_with_frequencies dict))
 
 
 length_diff_less_than :: Foldable t => Int -> Int -> t a -> Bool
