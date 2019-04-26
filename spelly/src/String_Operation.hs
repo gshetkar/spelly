@@ -18,7 +18,7 @@ import Data.Function
 import Edit_Distance
 
 -- | This is the main function that we call in Main.hs, It gives us the String of wrong words and suggestion of them in required format. 
-print_suggestion :: String -> String -> Int -> Int -> String -- ^ It takes 4 arguments in which 1st one is a text string on which we have to find the wrong words, 2nd one is a dictionary String respective of which we find the wrong word, 3rd is maximum number of suggestion you want for each wrong word and 4th is edit_distance of wrong and right word respectively and produces the string that combines all of them in a specific format.
+print_suggestion :: String -> String -> Int -> Int -> String 
 print_suggestion text dict s e = unlines $ map (output_format) (suggestions (clean_text text) dict s e)
 
 -- | This function take a tuple of line nummber, position of wrong word in line, wrong word and it's suggested word and produces the string that combines all of them in a specific format.
@@ -62,7 +62,7 @@ indices_in_text pattern text = map (+1) (map fst (filter (snd >>> ((==) pattern)
 
 -- | This Function takes a text line and dictionary as it's arguments and produces a list of unique wrong words in that line.
 wrong_words_in_line :: String -> String -> [String]
-wrong_words_in_line text dict = map (\x -> (head x)) (group (sort (wrong_words_of_string text dict)))
+wrong_words_in_line text dict = map (\x -> (head x)) (group (sort (wrong_words_of_string text dict))).
 
 -- | This Function takes a text line and dictionary as it's arguments and produces a list of all wrong words in that line.
 wrong_words_of_string :: String -> String -> [String]
