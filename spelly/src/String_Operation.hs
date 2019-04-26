@@ -29,10 +29,19 @@ output_format (line_num, char_num, word, suggested_words) =  "\x1b[34m" ++"\x1b[
 suggestions :: (Ord t, Num t, Num t1, Enum t, Enum t1) => String -> String -> Int -> Int -> [(t1, t, [Char], [[Char]])]
 suggestions text dict s e = map (\(line_num, char_num, word) -> (line_num, char_num, word, (give_me_suggestion word dict s e))) (error_in_file text dict)
 
+my_first :: (a, b, c) -> a
+my_first (a,b,c) = a
+
+my_second :: (a, b, c) -> b
+my_second (a,b,c) = b
+
+my_third :: (a, b, c) -> c
+my_third (a,b,c) = c
+
 -- | This function take a word, a dictionary string, maximum number of suggestion and edit distance as it's argument and produces the list of suggestion for that wrong word according to the given dictionary.
 give_me_suggestion :: [Char] -> String -> Int -> Int -> [[Char]]
-give_me_suggestion word_to_check dict s e = map fst $ take s $ reverse $ sortBy (compare `on` snd) word_count_pair
-    where word_count_pair =  [(word, freq) | (word, freq) <- (load_dictionary_with_frequencies dict), length_diff_less_than (e+1) (length word_to_check) word, distance word_to_check word <= e]
+give_me_suggestion word_to_check dict s e = map my_first $ take s $ sortBy (compare `on` my_third) (reverse $ sortBy (compare `on` my_second) word_count_pair)
+    where word_count_pair = filter (\(x,y,z) -> (z <= e)) (map (\(x, y) -> (x, y, distance word_to_check x)) (filter (\(word, freq) -> length_diff_less_than (e+1) (length word_to_check) word) (load_dictionary_with_frequencies dict)))
 
 -- | This function takes the 2 number (1 for difference and other for length) and a word as it's argument and return's True if the absolute difference between length of given word and given length is less than the given allowed difference, otherwise returns False.
 length_diff_less_than :: Foldable t => Int -> Int -> t a -> Bool

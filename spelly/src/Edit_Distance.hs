@@ -17,9 +17,13 @@ distance s1 s2 = dp Arr.! (m, n)
         -- if one string is empty
         edit_distance_helper (i, 0) = i
         edit_distance_helper (0, j) = j
-
-        edit_distance_helper (i, j) = if (s1 !! (i-1)) == (s2 !! (j-1))
-                                        then dp Arr.! (i-1, j-1)
-                                        else 1 + minimum [dp Arr.! (i-1, j),
-                                                          dp Arr.! (i, j-1),
-                                                          dp Arr.! (i-1, j-1)]
+        edit_distance_helper (i, j) = if ((i > 1 && i < m && j > 1 && j < n) && ((s1 !! (i-1)) == (s2 !! (j-2)) && (s1 !! (i-2)) == (s2 !! (j-1))))
+                                        then minimum [insert, remove, replace, transpose]
+                                        else minimum [insert, remove, replace]
+                                            where
+                                                insert  = dp Arr.! (i-1, j) + 1
+                                                remove  = dp Arr.! (i, j-1) + 1
+                                                replace = dp Arr.! (i-1, j-1) + 
+                                                            if (s1 !! (i-1)) == (s2 !! (j-1))
+                                                                then 0 else 1
+                                                transpose = dp Arr.! (i-2, j-2) + 1
