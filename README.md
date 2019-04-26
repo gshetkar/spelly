@@ -50,12 +50,14 @@ The documentation is done using haddock and can be found [here]().
 2. It gives the following output  
 ![Output on the run](spelly/data/image.png)
 
- The number _1::1_  denotes the line number and the character of the mistaken word respectively  
+ The number _1::3_  denotes the line number and the character of the mistaken word respectively  
  Following that is the word itself _cnduo't_  
- Then the suggested words are given in new lines in decreasing order of frequencies  
- _conduct_  
- _conduit_  
- _induct_  
+ 
+  Then the suggested words are given in new lines in decreasing order of frequencies  
+ 
+ - _conduct_  
+ - _conduit_  
+ - _induct_  
   
  
  
