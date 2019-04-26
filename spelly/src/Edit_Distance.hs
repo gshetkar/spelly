@@ -4,6 +4,8 @@ module Edit_Distance
 
 import qualified Data.Array as Arr
 
+-- | This function takes two words in the string format and retrurn the edit - distance between them using the edit distance algorithm
+distance :: Eq a => [a] -> [a] -> Int
 distance s1 s2 = dp Arr.! (m, n)
     where
         m = length s1
